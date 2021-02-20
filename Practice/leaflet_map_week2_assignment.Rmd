@@ -1,0 +1,36 @@
+---
+title: "Leaflet Map Developing Data Products Week 2 Assignment"
+author: "Mohammad Ateya"
+output:
+  html_document:
+    df_print: paged
+always_allow_html: yes
+---
+
+## Drawing circles corresponding to CVID-19 cases in top 10 Michigan counties
+### February 20th, 2021
+
+```{r, echo=FALSE, message=FALSE}
+library(tidyverse); library(leaflet)
+mi_counties <- data.frame(name = c("Wayne", "Oakland", "Macomb", "Kent","Genesee", "Washtenaw",
+                                   "Ottawa", "Ingham", "Saginaw", "Kalamazoo"),
+                        covid_cases = c(100000,73653, 58344, 51098, 25109, 	
+                                        18852, 22129, 16080, 15761, 14728),
+                        lat = c(42.195080, 42.655869, 42.695300, 43.175570, 
+                                43.080750, 42.084309, 41.744461, 42.573570,43.478920, 42.383570),
+                        lng = c(-83.345619, -83.334610, -82.728770, -85.575950, 
+                                -83.648110, -83.673882, -83.764000, -84.428080, -83.720880, -85.298670))
+mi_counties %>%
+  leaflet() %>%
+  addTiles() %>%
+  addCircles(weight = 1, radius = mi_counties$covid_cases/5) %>% 
+  addMarkers(lng = mi_counties$lng, lat = mi_counties$lat, 
+                      label =mi_counties$covid_cases) %>% 
+  addLabelOnlyMarkers(lng = mi_counties$lng, lat = mi_counties$lat, 
+                      label =mi_counties$name, 
+             labelOptions = labelOptions(noHide = T, textOnly = TRUE, 
+                                         textsize = "12px",
+                                         style = list ("color" = "purple",
+                                                       "font-style" = "italic")))
+```
+

@@ -1,5 +1,7 @@
 library(shiny)
-shinyServer(function(input, output) {
+shinyServer(
+  
+  function(input, output) {
   mtcars$mpgsp <- ifelse(mtcars$mpg - 20 > 0, mtcars$mpg - 20, 0)
   model1 <- lm(hp ~ mpg, data = mtcars)
   model2 <- lm(hp ~ mpgsp + mpg, data = mtcars)
@@ -45,4 +47,6 @@ shinyServer(function(input, output) {
   output$pred2 <- renderText({
     model2pred()
   })
+  
+  
 })

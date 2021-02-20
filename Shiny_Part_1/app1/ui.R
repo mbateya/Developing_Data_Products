@@ -1,14 +1,14 @@
 library(shiny)
 shinyUI(fluidPage(
-  titlePanel("Hello Shiny!"),
+  titlePanel("Hello World!"),
   sidebarLayout(
     sidebarPanel(
-      h3("Sidebar")
+      h1("Sidebar")
     ),
     
     # Show a plot of the generated distribution
     mainPanel(
-      h2("Hey")
+      h2("This is the main panel")
     )
   )
 ))
