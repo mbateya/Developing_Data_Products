@@ -13,7 +13,7 @@ library(httr)
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
-    output$desc <-   renderText({
+    data3 <-   reactive({
         rxname1 = input$Med1
         url1 <-
             paste0("https://rxnav.nlm.nih.gov/REST/Prescribe/rxcui?name=",
@@ -36,9 +36,13 @@ shinyServer(function(input, output) {
             )
         res3 = GET(url3)
         data3 = fromJSON(rawToChar(res3$content))
-        details <- data3$fullInteractionTypeGroup$fullInteractionType
-        ifelse(is.null(details),"No interactions found",data3[[3]]$fullInteractionType[[1]]$interactionPair[[1]]$description)
     })
-    output$disclaimer <- renderText({data3[[1]]})
+    output$desc <-   renderText({
+        details <- data3()$fullInteractionTypeGroup$fullInteractionType
+        ifelse(is.null(details),"No interactions found",data3()[[3]]$fullInteractionType[[1]]$interactionPair[[1]]$description)
+    })
+    output$details1 <-   renderTable({
+        data3()[[3]]$fullInteractionType[[1]]$interactionPair[[1]]$interactionConcept
+    })
     
 })

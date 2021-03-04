@@ -21,15 +21,19 @@ shinyUI(fluidPage(
             textInput("Med1", "Med Name", value = "", width = '1000px', 
                       placeholder = "Enter brand or generic name"),
             textInput("Med2", "Med Name", value = "", width = '1000px', 
-                      placeholder = "Enter brand or generic name")
+                      placeholder = "Enter brand or generic name"),
+            submitButton("Check")
         ),
 
         # Show text of the RXCUI
         mainPanel(
-            h4("Disclaimer from Source"),
-            textOutput("disclaimer"),
+            h5("Disclaimer from Source"),
+            p("It is not the intention of NLM to provide specific medical advice, but rather to provide users with 
+              information to better understand their health and their medications. NLM urges you to consult with 
+              a qualified physician for advice about medications."),
             h3("Interactions:"),
-            textOutput("desc")
+            textOutput("desc"),
+            tableOutput("details1")
         )
     )
 ))
