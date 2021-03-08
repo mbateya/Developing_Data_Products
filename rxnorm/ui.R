@@ -27,7 +27,11 @@ shinyUI(fluidPage(
 
         # Show text of the RXCUI
         mainPanel(
-            h5("Disclaimer from Source"),
+            p("This application checks drug-drug interactions for a pair of medications. The application is intended
+             for training purposes to fulfill the requirements of course project in the Coursera Johns Hopkins Data Science 
+              Data Product Development course. Interaction data are obtained from the US National Library of Medicine RXNORM databse using
+              and Application Programming Interface (API). This application does not intended to provide medical advice"),
+            h5("Disclaimer from Source:"),
             p("It is not the intention of NLM to provide specific medical advice, but rather to provide users with 
               information to better understand their health and their medications. NLM urges you to consult with 
               a qualified physician for advice about medications."),

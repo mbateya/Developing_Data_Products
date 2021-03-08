@@ -42,7 +42,7 @@ shinyServer(function(input, output) {
         ifelse(is.null(details),"No interactions found",data3()[[3]]$fullInteractionType[[1]]$interactionPair[[1]]$description)
     })
     output$details1 <-   renderTable({
-        data3()[[3]]$fullInteractionType[[1]]$interactionPair[[1]]$interactionConcept
+        data3()$fullInteractionTypeGroup$fullInteractionType[[1]]$interactionPair[[1]]$interactionConcept[[1]]$minConceptItem
     })
     
 })
