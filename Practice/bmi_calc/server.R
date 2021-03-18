@@ -16,8 +16,8 @@ library(tidyverse)
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
     bmi <- reactive({
-        wt <- input$weight
-        ht <- input$height
+        wt <- ifelse(input$method == "Metric",input$weight_m,input$weight_i/2.2)
+        ht <- ifelse(input$method == "Metric",input$height_m,input$height_i*2.54)
         ifelse(is.null(wt)|is.null(ht),0,round(wt / ((ht / 100) ^ 2), 1))
     })
     output$bmi <-
