@@ -15,11 +15,14 @@ shinyUI(fluidPage(
   titlePanel("Adult Body Mass Index (BMI) Calculator"),
   
   # Sidebar with a slider input for number of bins
-  sidebarLayout(sidebarPanel(
-    tags$p("Enter your weight and height then press Enter or Tab to calculate your Body
-              Mass Index (BMI):"),
-    tags$br(),
-    radioButtons("method", NULL, c("Metric", "English")),
+  sidebarLayout(
+    sidebarPanel(
+      tags$p(
+        "Enter your weight and height then press Enter or Tab to calculate your Body
+              Mass Index (BMI):"
+      ),
+      tags$br(),
+      radioButtons("method", NULL, c("Metric", "English")),
       conditionalPanel(
         condition = "input.method == 'Metric'",
         numericInput(
@@ -41,7 +44,8 @@ shinyUI(fluidPage(
         )
         
       )
-      ,      conditionalPanel(
+      ,
+      conditionalPanel(
         condition = "input.method == 'English'",
         numericInput(
           "weight_e",
@@ -60,44 +64,68 @@ shinyUI(fluidPage(
           value = NULL
         )
       ),
-
-  ),
-  
-  
-  # Show a plot of the generated distribution
-  mainPanel(
-    tags$body(fluidRow(
-      h5("Body Mass Index (BMI)", style = "text-align:left;
+      
+    ),
+    
+    # Show a plot of the generated distribution
+    mainPanel(
+      tags$body(
+        fluidRow(
+        column(
+          h5("Body Mass Index (BMI)", style = "text-align:center;
+          color:black;
+          font-weight:bold;
+             font-size:20px"),
+          br(),
+          textOutput("bmi"),
+          br(),
+          textOutput("category"),
+          width = 4,
+          style = "text-align:center;
+          color:blue;
+          font-weight:bold;
+          font-size:24px"
+        ),
+        column(
+          offset = 1,
+          h5("How is BMI interpreted?", style = "text-align:center;
           color:black;
           font-weight:bold"),
-      column(
-        textOutput("bmi"),
-        width = 2,
-        style = "text-align:center;
-          color:blue;
-          font-weight:bold"
-      )
-    )
-    
-    ,
-    fluidRow(
-      br(),
-      column(
-        textOutput("category"),
-        width = 2,
-        style = "text-align:center;
-          color:crimson;
-          font-weight:bold"
-      )
-    ),
-    fluidRow(
-      br(),
-     tags$div(
-        style = "position: absolute; bottom: 0;",
-        tags$p("Test")
+          tags$p(
+            "For adults 20 years old and older,
+        BMI is interpreted using standard weight status categories.
+        These categories are the same for men and women of all body types and ages.
+               The standard weight status categories associated with BMI
+               ranges for adults are shown in the following table:"
+          ),
+          
+          tags$table(
+            id = "table5",
+            class = "table table-bordered ",
+            
+            tags$thead(tags$tr(
+              tags$th("BMI", scope = "col"),
+              tags$th("Weight Status", scope =
+                        "col")
+            )),
+            
+            tags$tbody(
+              tags$tr(tags$td("Below 18.5"), tags$td("Underweight")),
+              tags$tr(tags$td("18.5 - 24.9"), tags$td("Normal or Healthy Weight"))
+              ,
+              tags$tr(tags$td("25.0 - 29.9"), tags$td("Overweight"))
+              ,
+              tags$tr(tags$td("30.0 and Above"), tags$td("Obese"))
+            )
+          )
+          ,
+          width = 6,
+          style = "text-align:left;
+          color:black;border: 1px solid grey;background-color:azure"
         )
       )
-    ,
-    style = "background-color:powderblue")
-  ))
+      ,
+      style = "background-color:powderblue")
+    )
+  )
 ))

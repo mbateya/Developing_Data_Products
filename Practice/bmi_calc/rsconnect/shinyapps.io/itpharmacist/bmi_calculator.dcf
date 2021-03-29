@@ -1,0 +1,13 @@
+name: bmi_calculator
+title: bmi_calculator
+username:
+account: itpharmacist
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3839202
+bundleId: 4408054
+url: https://itpharmacist.shinyapps.io/bmi_calculator/
+when: 1617031763.53569
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData
